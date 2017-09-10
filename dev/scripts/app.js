@@ -1,10 +1,67 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import firebase from './components/firebase.js';
+import Header from  './components/Header.js';
+import AddAvocado from './components/AddAvocado.js';
+
+const dbRef = firebase.database().ref('/avocados');
+
 class App extends React.Component {
-	render(){
+	constructor(){
+		super();
+		this.state = {
+			avocados: [],
+			daysToRipe: 1,
+			timeOfDay: '',
+			avocadoName: '',
+
+		}
+		this.handleInput = this.handleInput.bind(this);
+		this.handleAdd = this.handleAdd.bind(this);
+	}
+	handleInput(event){
+		this.setState({
+			[event.target.name]: event.target.value,
+		});
+	}
+	handleAdd(event){
+		event.preventDefault();
+		let currentTime = new Date();
+		currentTime = currentTime.getTime();
+		const timeToRipe = (this.state.daysToRipe * 24 * 60 * 60 * 1000);
+		const ripeDate = currentTime + timeToRipe;
+		const newAvocado = {
+			name: this.state.avocadoName,
+			addTime: currentTime,
+			daysToRipe: this.state.daysToRipe,
+			ripeDate: ripeDate,
+			timeOfDay: this.state.timeOfDay,
+		}
+		dbRef.push(newAvocado);
+		this.setState({
+			daysToRipe: 1,
+			timeOfDay: '',
+			avocadoName: '',
+		})
+	}
+	componentDidMount(){
 		console.log('Engaged');
+	}
+	render(){
+		
 		return (
+			<div>
+				<Header />
+				<AddAvocado 
+					handleInput={this.handleInput}
+					handleRange={this.handleRange} 
+					handleToD={this.handleToD}
+					handleAdd={this.handleAdd}
+					daysToRipe={this.state.daysToRipe}
+					avocadoName={this.state.avocadoName}
+				/>
+			</div>
 		)
 	}
 }
