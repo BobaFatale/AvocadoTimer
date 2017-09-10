@@ -7,6 +7,8 @@ class AddAvocado extends React.Component {
 				<form onSubmit={this.props.handleAdd}>
 					<label htmlFor="avocadoName">Give Your Avocado a Name</label>
 					<input type="text" id="avocadoName" name="avocadoName" placeholder="Give your avocado a name" value={this.props.avocadoName} onChange={this.props.handleInput} />
+					<label htmlFor="emailInput">Enter your email address</label>
+					<input type="email" id="emailInput" name="avocadoEmail" placeholder="enter your email" value={this.props.avocadoEmail} onChange={this.props.handleInput} />
 					<div className="addAvocado__range">
 						<input type="range" min='1' max='14' step='1' value={this.props.daysToRipe} name="daysToRipe" onChange={this.props.handleInput} />
 					</div>
