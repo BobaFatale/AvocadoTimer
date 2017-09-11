@@ -76,9 +76,11 @@ class App extends React.Component {
 			[event.target.name]: event.target.value,
 		});
 	}
-	removeAvocado(key) {
-		const itemRef = firebase.database().ref(`App/users/${this.state.user.uid}/avocados/${key}`)
-		itemRef.remove();
+	removeAvocado(key,emailKey) {
+		const avocadoRef = firebase.database().ref(`App/users/${this.state.user.uid}/avocados/${key}`);
+		const emailRef = firebase.database().ref(`App/pendingEmails/${emailKey}`);
+		avocadoRef.remove();
+		emailRef.remove();
 	}
 	handleAdd(event){
 		event.preventDefault();
@@ -92,6 +94,15 @@ class App extends React.Component {
 		ripeDate.minutes(0);
 		ripeDate.hours(this.state.timeOfDay);
 		const pendRef = dbRef.child('pendingEmails')
+		const newEmail = {
+			name: this.state.avocadoName,
+			username: this.state.user.displayName,
+			email: this.state.user.email,
+			ripeDate: ripeDate.valueOf(),
+		}
+		const pushRef = pendRef.push(newEmail);
+		const pushKey = pushRef.key;
+		console.log(pushKey);
 		const newAvocado = {
 			name: this.state.avocadoName,
 			username: this.state.user.displayName,
@@ -99,15 +110,9 @@ class App extends React.Component {
 			addTime: currentTime,
 			daysToRipe: this.state.daysToRipe,
 			ripeDate: ripeDate.valueOf(),
+			emailKey: pushKey,
 		}
 		userDBRef.push(newAvocado);
-		const newEmail = {
-			name: this.state.avocadoName,
-			username: this.state.user.displayName,
-			email: this.state.user.email,
-			ripeDate: ripeDate.valueOf(),
-		}
-		pendRef.push(newEmail);
 		this.setState({
 			daysToRipe: 1,
 			timeOfDay: '',

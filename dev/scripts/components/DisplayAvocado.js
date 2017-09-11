@@ -19,7 +19,7 @@ class DisplayAvocado extends React.Component {
 			    				<h3>{avocado.name}</h3>
 			    				<p>Ripe on {ripeDate.format("dddd, MMMM Do YYYY, h:mm a")} </p>
 			    				<p>{daysLeft} days, {hoursLeft} hours, {minutesLeft} minutes remaining</p>
-			    				<button onClick={() => this.props.removeAvocado(avocado.id)}>Remove Avocado</button>
+			    				<button onClick={() => this.props.removeAvocado(avocado.id,avocado.emailKey)}>Remove Avocado</button>
 			    			</li>
 			    		);
 			    	}))
