@@ -7,13 +7,15 @@ import Header from  './components/Header.js';
 import AddAvocado from './components/AddAvocado.js';
 import DisplayAvocado from './components/DisplayAvocado.js'
 
-const dbRef = firebase.database().ref('/avocados');
+const dbRef = firebase.database().ref('/App');
+
 
 class App extends React.Component {
 	constructor(){
 		super();
 		this.state = {
 			avocados: [],
+			userAvocados: [],
 			daysToRipe: 1,
 			timeOfDay: '',
 			avocadoName: '',
@@ -28,6 +30,12 @@ class App extends React.Component {
 	}
 	componentDidMount(){
 		console.log('Engaged');
+		firebase.auth().onAuthStateChanged((user) => {
+		  if (user) {
+		  	this.setState({user});
+		    const userDBRef = dbRef.child(`users/${this.state.user.uid}/avocados`);
+		  }
+		});
 		dbRef.on('value', (snapshot) => {
 			const items = snapshot.val();
 			const newAvocadoArray = [];
@@ -40,11 +48,6 @@ class App extends React.Component {
 				avocados:newAvocadoArray,
 			})
 		})
-		auth.onAuthStateChanged((user) => {
-	    if (user) {
-	      this.setState({ user });
-	    } 
-	  });
 	}
 	login() {
 	  auth.signInWithPopup(provider) 
@@ -76,22 +79,31 @@ class App extends React.Component {
 	}
 	handleAdd(event){
 		event.preventDefault();
+		const userDBRef = dbRef.child(`users/${this.state.user.uid}/avocados`);
+		console.log(userDBRef.toString());
 		let currentTime = new Date();
 		currentTime = currentTime.getTime();
 		const timeToRipe = (this.state.daysToRipe * 24 * 60 * 60 * 1000);
 		const finalTime = currentTime + timeToRipe;
 		const ripeDate = moment(finalTime);
+		ripeDate.seconds(0);
 		ripeDate.minutes(0);
 		ripeDate.hours(this.state.timeOfDay);
+		const pendRef = dbRef.child('pendingEmails')
 		const newAvocado = {
 			name: this.state.avocadoName,
 			email: this.state.avocadoEmail,
 			addTime: currentTime,
 			daysToRipe: this.state.daysToRipe,
 			ripeDate: ripeDate.valueOf(),
-			timeOfDay: this.state.timeOfDay,
 		}
-		dbRef.push(newAvocado);
+		userDBRef.push(newAvocado);
+		const newEmail = {
+			name: this.state.avocadoName,
+			email: this.state.avocadoEmail,
+			ripeDate: ripeDate.valueOf(),
+		}
+		pendRef.push(newEmail);
 		this.setState({
 			daysToRipe: 1,
 			timeOfDay: '',
@@ -114,6 +126,7 @@ class App extends React.Component {
 					daysToRipe={this.state.daysToRipe}
 					avocadoName={this.state.avocadoName}
 					avocadoEmail={this.state.avocadoEmail}
+					user={this.state.user}
 				/>
 				<DisplayAvocado
 					avocados={this.state.avocados}

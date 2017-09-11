@@ -2,8 +2,10 @@ import React from 'react';
 
 class AddAvocado extends React.Component {
 	render(){
-		return(
-			<div>
+		const user = this.props.user;
+		let form = '';
+		if (user) {
+			form = (
 				<form onSubmit={this.props.handleAdd}>
 					<label htmlFor="avocadoName">Give Your Avocado a Name</label>
 					<input type="text" id="avocadoName" name="avocadoName" placeholder="Give your avocado a name" value={this.props.avocadoName} onChange={this.props.handleInput} />
@@ -24,6 +26,15 @@ class AddAvocado extends React.Component {
 					</div>
 					<button>Add Avocado</button>
 				</form>
+			)
+		}else if (user === null){
+			form = (
+				<p>You must be logged in to use Avocado Timer</p>
+			)
+		}
+		return(
+			<div className="AddAvocado">
+				{form}
 			</div>
 		)
 	}
