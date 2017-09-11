@@ -16,11 +16,11 @@ class AddAvocado extends React.Component {
 					<input type="number" id="daysToRipe" name="daysToRipe" value={this.props.daysToRipe} min="1" max="14" onChange={this.props.handleInput}/>
 					<div>
 						<label htmlFor="morningToD">Morning</label>
-						<input type="radio" name="timeOfDay" id="morningToD" value="0900" className="addAvocado__radioToD" onChange={this.props.handleInput} />
+						<input type="radio" name="timeOfDay" id="morningToD" value="9" className="addAvocado__radioToD" checked="checked" onChange={this.props.handleInput} />
 						<label htmlFor="afternoonToD">Afternoon</label>
-						<input type="radio" name="timeOfDay" id="afternoonToD" value="1200" className="addAvocado__radioToD" onChange={this.props.handleInput} />
+						<input type="radio" name="timeOfDay" id="afternoonToD" value="12" className="addAvocado__radioToD" onChange={this.props.handleInput} />
 						<label htmlFor="eveningToD">Evening</label>
-						<input type="radio" name="timeOfDay" id="eveningToD" value="1800" className="addAvocado__radioToD" onChange={this.props.handleInput} />
+						<input type="radio" name="timeOfDay" id="eveningToD" value="18" className="addAvocado__radioToD" onChange={this.props.handleInput} />
 					</div>
 					<button>Add Avocado</button>
 				</form>
