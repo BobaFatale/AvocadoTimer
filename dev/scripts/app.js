@@ -56,8 +56,8 @@ class App extends React.Component {
 		// })
 	}
 	pageLoad(){
-
-	}
+		
+	}	 
 	login() {
 	  auth.signInWithPopup(provider) 
     .then((result) => {
