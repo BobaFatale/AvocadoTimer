@@ -118,6 +118,7 @@ class App extends React.Component {
 				<DisplayAvocado
 					avocados={this.state.avocados}
 					removeAvocado={this.removeAvocado}
+					user={this.state.user}
 				/>
 			</div>
 		)

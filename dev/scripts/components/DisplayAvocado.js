@@ -3,12 +3,10 @@ import moment from 'moment';
 
 class DisplayAvocado extends React.Component {
 	render(){
-
-		return(
-			<section className='avocadoList'>
-			  <div className='wrapper'>
-			    <ul>
-			    	{this.props.avocados.map((avocado) => {
+		const user = this.props.user;
+		let display = '';
+		if (user){
+			display = (this.props.avocados.map((avocado) => {
 			    		const now = new Date();
 			    		const currentTime = now.getTime();
 			    		const timeLeft = (avocado.ripeDate - currentTime);
@@ -24,7 +22,15 @@ class DisplayAvocado extends React.Component {
 			    				<button onClick={() => this.props.removeAvocado(avocado.id)}>Remove Avocado</button>
 			    			</li>
 			    		);
-			    	})}
+			    	}))
+		}else if(user === null){
+			// display = ()
+		}
+		return(
+			<section className='avocadoList'>
+			  <div className='wrapper'>
+			    <ul>
+			    	{display}
 			    </ul>
 			  </div>
 			</section>
