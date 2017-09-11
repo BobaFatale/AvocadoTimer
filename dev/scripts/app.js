@@ -25,6 +25,7 @@ class App extends React.Component {
 		}
 		this.handleInput = this.handleInput.bind(this);
 		this.handleAdd = this.handleAdd.bind(this);
+		this.removeAvocado = this.removeAvocado.bind(this);
 		this.login = this.login.bind(this);
 		this.logout = this.logout.bind(this);
 	}
@@ -34,20 +35,23 @@ class App extends React.Component {
 		  if (user) {
 		  	this.setState({user});
 		    const userDBRef = dbRef.child(`users/${this.state.user.uid}/avocados`);
+		    userDBRef.on('value', (snapshot) => {
+		    	const items = snapshot.val();
+		    	const newAvocadoArray = [];
+		    	for (let key in items) {
+		    		const firebaseItem = items[key];
+		    		firebaseItem.id = key;
+		    		newAvocadoArray.push(firebaseItem);
+		    	}
+		    	this.setState({
+		    		userAvocados:newAvocadoArray,
+		    	})
+		    })
 		  }
 		});
-		dbRef.on('value', (snapshot) => {
-			const items = snapshot.val();
-			const newAvocadoArray = [];
-			for (let key in items) {
-				const firebaseItem = items[key];
-				firebaseItem.id = key;
-				newAvocadoArray.push(firebaseItem);
-			}
-			this.setState({
-				avocados:newAvocadoArray,
-			})
-		})
+		// dbRef.on('value', (snapshot) => {
+		// 	const items = snapshot.val();			
+		// })
 	}
 	login() {
 	  auth.signInWithPopup(provider) 
@@ -56,7 +60,6 @@ class App extends React.Component {
       const userID = result.user.uid;
       this.setState({
         user: user,
-        userID: userID,
       });
     });
 	}
@@ -74,13 +77,12 @@ class App extends React.Component {
 		});
 	}
 	removeAvocado(key) {
-		const itemRef = firebase.database().ref(`/avocados/${key}`)
+		const itemRef = firebase.database().ref(`App/users/${this.state.user.uid}/avocados/${key}`)
 		itemRef.remove();
 	}
 	handleAdd(event){
 		event.preventDefault();
 		const userDBRef = dbRef.child(`users/${this.state.user.uid}/avocados`);
-		console.log(userDBRef.toString());
 		let currentTime = new Date();
 		currentTime = currentTime.getTime();
 		const timeToRipe = (this.state.daysToRipe * 24 * 60 * 60 * 1000);
@@ -92,7 +94,8 @@ class App extends React.Component {
 		const pendRef = dbRef.child('pendingEmails')
 		const newAvocado = {
 			name: this.state.avocadoName,
-			email: this.state.avocadoEmail,
+			username: this.state.user.displayName,
+			email: this.state.user.email,
 			addTime: currentTime,
 			daysToRipe: this.state.daysToRipe,
 			ripeDate: ripeDate.valueOf(),
@@ -100,7 +103,8 @@ class App extends React.Component {
 		userDBRef.push(newAvocado);
 		const newEmail = {
 			name: this.state.avocadoName,
-			email: this.state.avocadoEmail,
+			username: this.state.user.displayName,
+			email: this.state.user.email,
 			ripeDate: ripeDate.valueOf(),
 		}
 		pendRef.push(newEmail);
@@ -129,7 +133,7 @@ class App extends React.Component {
 					user={this.state.user}
 				/>
 				<DisplayAvocado
-					avocados={this.state.avocados}
+					avocados={this.state.userAvocados}
 					removeAvocado={this.removeAvocado}
 					user={this.state.user}
 				/>
