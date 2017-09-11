@@ -16,11 +16,11 @@ class AddAvocado extends React.Component {
 					<input type="number" id="daysToRipe" name="daysToRipe" value={this.props.daysToRipe} min="1" max="14" onChange={this.props.handleInput}/>
 					<div>
 						<label htmlFor="morningToD">Morning</label>
-						<input type="radio" name="timeOfDay" id="morningToD" value="9" className="addAvocado__radioToD" required onChange={this.props.handleInput} />
+						<input type="radio" name="timeOfDay" id="morningToD" value="9" className="addAvocado__radioToD" required checked={this.props.checked === "9"} onChange={(e) => this.props.handleInput(e, true)} />
 						<label htmlFor="afternoonToD">Afternoon</label>
-						<input type="radio" name="timeOfDay" id="afternoonToD" value="12" className="addAvocado__radioToD" required onChange={this.props.handleInput} />
+						<input type="radio" name="timeOfDay" id="afternoonToD" value="12" className="addAvocado__radioToD" required checked={this.props.checked === "12"}  onChange={(e) => this.props.handleInput(e, true)} />
 						<label htmlFor="eveningToD">Evening</label>
-						<input type="radio" name="timeOfDay" id="eveningToD" value="18" className="addAvocado__radioToD" required onChange={this.props.handleInput} />
+						<input type="radio" name="timeOfDay" id="eveningToD" value="18" className="addAvocado__radioToD" required checked={this.props.checked === "18"} onChange={(e) => this.props.handleInput(e, true)} />
 					</div>
 					<button>Add Avocado</button>
 				</form>

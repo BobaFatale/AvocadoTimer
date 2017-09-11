@@ -5,7 +5,8 @@ import moment from 'moment';
 import firebase, { auth, provider } from './components/firebase.js';
 import Header from  './components/Header.js';
 import AddAvocado from './components/AddAvocado.js';
-import DisplayAvocado from './components/DisplayAvocado.js'
+import DisplayAvocado from './components/DisplayAvocado.js';
+import Footer from './components/Footer.js';
 
 const dbRef = firebase.database().ref('/App');
 
@@ -22,6 +23,7 @@ class App extends React.Component {
 			avocadoEmail: '',
 			user: null,
 			userID: '',
+			checked: '',
 		}
 		this.handleInput = this.handleInput.bind(this);
 		this.handleAdd = this.handleAdd.bind(this);
@@ -53,6 +55,9 @@ class App extends React.Component {
 		// 	const items = snapshot.val();			
 		// })
 	}
+	pageLoad(){
+
+	}
 	login() {
 	  auth.signInWithPopup(provider) 
     .then((result) => {
@@ -71,7 +76,12 @@ class App extends React.Component {
       });
     });
 	}
-	handleInput(event){
+	handleInput(event, isRadio){
+		if (isRadio === true){
+			this.setState({
+				checked: event.target.value
+			})
+		}
 		this.setState({
 			[event.target.name]: event.target.value,
 		});
@@ -118,6 +128,7 @@ class App extends React.Component {
 			timeOfDay: '',
 			avocadoName: '',
 			avocadoEmail: '',
+			checked: '',
 		})
 	}
 	render(){
@@ -135,6 +146,7 @@ class App extends React.Component {
 					daysToRipe={this.state.daysToRipe}
 					avocadoName={this.state.avocadoName}
 					avocadoEmail={this.state.avocadoEmail}
+					checked={this.state.checked}
 					user={this.state.user}
 				/>
 				<DisplayAvocado
@@ -142,6 +154,7 @@ class App extends React.Component {
 					removeAvocado={this.removeAvocado}
 					user={this.state.user}
 				/>
+				<Footer />
 			</div>
 		)
 	}
