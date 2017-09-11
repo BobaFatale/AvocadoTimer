@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import moment from 'moment';
 
-import firebase from './components/firebase.js';
+import firebase, { auth, provider } from './components/firebase.js';
 import Header from  './components/Header.js';
 import AddAvocado from './components/AddAvocado.js';
 import DisplayAvocado from './components/DisplayAvocado.js'
@@ -18,9 +18,13 @@ class App extends React.Component {
 			timeOfDay: '',
 			avocadoName: '',
 			avocadoEmail: '',
+			user: null,
+			userID: '',
 		}
 		this.handleInput = this.handleInput.bind(this);
 		this.handleAdd = this.handleAdd.bind(this);
+		this.login = this.login.bind(this);
+		this.logout = this.logout.bind(this);
 	}
 	componentDidMount(){
 		console.log('Engaged');
@@ -36,6 +40,30 @@ class App extends React.Component {
 				avocados:newAvocadoArray,
 			})
 		})
+		auth.onAuthStateChanged((user) => {
+	    if (user) {
+	      this.setState({ user });
+	    } 
+	  });
+	}
+	login() {
+	  auth.signInWithPopup(provider) 
+    .then((result) => {
+      const user = result.user;
+      const userID = result.user.uid;
+      this.setState({
+        user: user,
+        userID: userID,
+      });
+    });
+	}
+	logout() {
+		auth.signOut()
+    .then(() => {
+      this.setState({
+        user: null
+      });
+    });
 	}
 	handleInput(event){
 		this.setState({
@@ -75,7 +103,11 @@ class App extends React.Component {
 		
 		return (
 			<div>
-				<Header />
+				<Header
+					user={this.state.user}
+					login={this.login}
+					logout={this.logout}
+				/>
 				<AddAvocado 
 					handleInput={this.handleInput}
 					handleAdd={this.handleAdd}
