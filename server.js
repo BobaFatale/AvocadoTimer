@@ -1,6 +1,23 @@
 const express = require('express');
 const app = express();
+// const sendgrid = require('./sendgrid.json');
+const sendgrid = require('./config.js');
 const admin = require("firebase-admin");
+const sgMail = require('@sendgrid/mail');
+
+// sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+sgMail.setApiKey(sendgrid.SENDGRID_API_KEY);
+// sgMail.setApiKey('./sendgrid.env');
+
+const msg = {
+  to: 'juneanddog@gmail.com',
+  from: 'noreply@guacr.com',
+  subject: 'avocado Test',
+  text: 'and easy to do anywhere, even with Node.js',
+  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+};
+sgMail.send(msg);
+
 
 var serviceAccount = require("./avocadotimer-firebase-adminsdk-yhkom-7dba4dd1ef.json");
 
@@ -33,7 +50,7 @@ const getEmails = (dbVal) => {
 			todayEmails.push(item);
 		}
 	}
-	console.log(todayEmails);
+	// console.log(todayEmails);
 }
 
 app.get("/",(req,res) => {
