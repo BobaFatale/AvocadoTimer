@@ -8,7 +8,7 @@ class Footer extends React.Component {
 		return(
 			<footer>
 				<div className="wrapper">
-					<p><i className="fa fa-copyright"></i> 2017 June Epstein | powered by Firebase</p>
+					<p><i className="fa fa-copyright"></i> 2017 <a href="http://juneepstein.com">June Epstein</a> | powered by Firebase</p>
 				</div>
 			</footer>
 		);
