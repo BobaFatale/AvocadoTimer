@@ -35,7 +35,12 @@ class Countdown extends React.Component {
 			})
 		}
 	}
-
+	timerEnds() {
+		this.setState({
+			timeLeft: '',
+		})
+	}
+	co
 	render(){
 		// const classes = className({
 		// 	'avocado__countdown':true,
