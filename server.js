@@ -10,10 +10,31 @@ admin.initializeApp({
 });
 
 const db = admin.database();
-const ref = db.ref("/App/pendingEmails/");
-ref.once("value", function(snapshot) {
-  console.log(snapshot.val());
+const pendRef = db.ref("/App/pendingEmails/");
+const sentRef = db.ref("/App/sentEmails/");
+let dbVal = {};
+let todayEmails = [];
+
+pendRef.on("value", (snapshot) => {
+  dbVal = snapshot.val();
+  getEmails(dbVal);
+}, (errorObject) => {
+  console.log("The read failed: " + errorObject.code);
 });
+
+const getEmails = (dbVal) => {
+	const now = new Date();
+	const currentTime = now.getTime();
+	const plusOne = currentTime + 86400000;
+	todayEmails = [];
+	for (key in dbVal){
+		const item = dbVal[key];
+		if (item.ripeDate <= plusOne) {
+			todayEmails.push(item);
+		}
+	}
+	console.log(todayEmails);
+}
 
 app.get("/",(req,res) => {
 	res.send('hello');
