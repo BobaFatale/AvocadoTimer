@@ -1,23 +1,10 @@
 const express = require('express');
 const app = express();
-// const sendgrid = require('./sendgrid.json');
-const sendgrid = require('./config.js');
+const config = require('./config.js');
 const admin = require("firebase-admin");
 const sgMail = require('@sendgrid/mail');
 
-// sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-sgMail.setApiKey(sendgrid.SENDGRID_API_KEY);
-// sgMail.setApiKey('./sendgrid.env');
-
-const msg = {
-  to: 'juneanddog@gmail.com',
-  from: 'noreply@guacr.com',
-  subject: 'avocado Test',
-  text: 'and easy to do anywhere, even with Node.js',
-  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-};
-sgMail.send(msg);
-
+sgMail.setApiKey(config.SENDGRID_API_KEY);
 
 var serviceAccount = require("./avocadotimer-firebase-adminsdk-yhkom-7dba4dd1ef.json");
 
@@ -46,11 +33,31 @@ const getEmails = (dbVal) => {
 	todayEmails = [];
 	for (key in dbVal){
 		const item = dbVal[key];
+		item.id = key;
 		if (item.ripeDate <= plusOne) {
 			todayEmails.push(item);
 		}
 	}
-	// console.log(todayEmails);
+	console.log(todayEmails);
+	sendEmails(todayEmails);
+}
+
+const sendEmails = (emailList) => {
+	emailList.map((item) => {
+		const msg = {
+		  to: 'juneanddog@gmail.com',
+		  from: {
+		  	email:'noreply@guacr.com',
+		  	name:'Guacr Notifications'
+		  },
+		  subject: 'Your Avocado is Ripe',
+		  text: `Hi ${item.username},
+		  Your Avocado ${item.name} is ripe! Don't forget to eat it today!`,
+		  html: `Hi ${item.username},<br>
+		  <strong>Your Avocado ${item.name} is ripe! Don't forget to eat it today!</strong>`,
+		};
+		// sgMail.send(msg);
+	})
 }
 
 app.get("/",(req,res) => {
