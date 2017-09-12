@@ -56,7 +56,7 @@ class App extends React.Component {
 		// })
 	}
 	pageLoad(){
-		
+
 	}	 
 	login() {
 	  auth.signInWithPopup(provider) 
@@ -100,6 +100,7 @@ class App extends React.Component {
 		const timeToRipe = (this.state.daysToRipe * 24 * 60 * 60 * 1000);
 		const finalTime = currentTime + timeToRipe;
 		const ripeDate = moment(finalTime);
+		ripeDate.millisecond(0);
 		ripeDate.seconds(0);
 		ripeDate.minutes(0);
 		ripeDate.hours(this.state.timeOfDay);
