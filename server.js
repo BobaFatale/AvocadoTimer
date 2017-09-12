@@ -26,10 +26,20 @@ pendRef.on("value", (snapshot) => {
   console.log("The read failed: " + errorObject.code);
 });
 
+//moment 
+//current
+//run on setTimeout first between now and midnight
+//after that setinterval begins between all the rest;
+const timer = setInterval(() => tick(), 60000);
+
+const tick = () => {
+	console.log('ping');
+}
+
 const getEmails = (dbVal) => {
 	const now = new Date();
 	const currentTime = now.getTime();
-	const plusOne = currentTime + 86400000;
+	const plusOne = currentTime + 3600000;
 	todayEmails = [];
 	for (key in dbVal){
 		const item = dbVal[key];
@@ -41,9 +51,13 @@ const getEmails = (dbVal) => {
 	console.log(todayEmails);
 	sendEmails(todayEmails);
 }
-
 const sendEmails = (emailList) => {
 	emailList.map((item) => {
+		const sentEmail = item;
+		const emailRef = sentRef.child(`/${item.id}`);
+		emailRef.set(item);
+		const removeRef = pendRef.child(`/${item.id}`);
+		removeRef.remove();
 		const msg = {
 		  to: 'juneanddog@gmail.com',
 		  from: {
@@ -54,8 +68,10 @@ const sendEmails = (emailList) => {
 		  text: `Hi ${item.username},
 		  Your Avocado ${item.name} is ripe! Don't forget to eat it today!`,
 		  html: `Hi ${item.username},<br>
-		  <strong>Your Avocado ${item.name} is ripe! Don't forget to eat it today!</strong>`,
+		  Your Avocado <strong>${item.name}</strong> is ripe! Don't forget to eat it today!`,
+		  send_at: (Math.floor(item.ripeDate/1000)),
 		};
+		console.log(msg);
 		// sgMail.send(msg);
 	})
 }
