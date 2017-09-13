@@ -8,6 +8,7 @@ class Countdown extends React.Component {
 		}
 		this.runCountdown();
 		this.runCountdown = this.runCountdown.bind(this);
+		this.timerEnds = this.timerEnds.bind(this);
 	}
 	componentWillUnmount() {
 		clearInterval(this.timerID);
@@ -39,11 +40,13 @@ class Countdown extends React.Component {
 		}
 	}
 	timerEnds() {
+		// this.props.removeAvocado(this.key);
+		this.props.expired();
+		this.props.removeAvocado(this.props.parentID);
 		this.setState({
 			timeLeft: '',
 		})
 	}
-	co
 	render(){
 		// const classes = className({
 		// 	'avocado__countdown':true,
