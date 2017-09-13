@@ -45,3 +45,145 @@
 .addAvocado__splashTitle{
 	margin-bottom: 50px;
 }
+.avocadoForm{
+	padding: 20px 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	h3{
+		font-size: 2rem;
+		font-family: 'Roboto Slab', serif;
+	}
+	h4{
+		font-size: 1.6rem;
+		margin-top: 25px;
+	}
+	label{
+		font-size: 1.6rem;
+	}
+	
+}
+.avocadoForm__name{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	flex-wrap: wrap;
+	width: 50%;
+	margin-top: 10px;
+	input{
+		width: 100%;
+		padding: 10px 20px;
+		font-size: 2rem;
+		background: transparent;
+		border:none;
+		border-bottom: 2px solid $avoGreen;
+		text-align: center;
+		&::placeholder{
+			color:$avoGreen;
+		}
+	}
+}
+.avocadoForm__date{
+	margin-top: 10px;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	flex-wrap: wrap;
+	@include respond-to("large") {
+		flex-direction: column;
+		justify-content: center;
+	}
+}
+.avocadoForm__range{
+	width: 75%;
+	label{
+		display: block;
+		text-align: center;
+	}
+	input{
+		width: 100%;
+		transform: rotate(-180deg);
+	}
+	.rangeBar{
+		width: 100%;
+		height: 50px;
+		background: linear-gradient(to right, $avoDarkGreen, $avoBlack 90%);
+		border: 2px solid $avoGreen;
+		border-radius: 250px;
+	}
+}
+.avocadoForm__number{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	label{
+		display: block;
+		margin-top: 10px;
+	}
+	input{
+		border: 2px solid $avoGreen;
+		padding: 10px 20px;
+		background: transparent;
+		border-radius: 250px;
+		font-size: 1.8rem;
+		color: $avoGreen;
+	}
+}
+.avocadoForm__radio{
+	margin-top: 20px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	input{
+		display: none;
+	}
+	label{
+		display: block;
+		width: calc(100/3);
+		padding: 10px 20px;
+		border: 2px solid $avoGreen;
+		transition: all 0.5s;
+	}
+}
+.avocadoForm__radio--active{
+	background: $avoBlack;
+	color: $avoGreen;
+	transition: all 0.5s;
+}
+.avocadoForm__radio--morn{
+	border-radius: 250px 0 0 250px; 
+	border-right: 1px solid $avoGreen;
+}
+.avocadoForm__radio--aft{
+	border-left: 1px solid $avoGreen;
+	border-right: 1px solid $avoGreen;
+}
+.avocadoForm__radio--eve{
+	border-radius: 0 250px 250px 0;
+	border-left: 1px solid $avoGreen;
+}
+.avocadoForm__button{
+	margin-top: 25px;
+	button{
+		appearance:none;
+		background: transparent;
+		border: 2px solid $avoGreen;
+		color: $avoGreen;
+		padding: 10px 20px;
+		font-size: 1.8rem;
+		border-radius: 250px;
+		&:hover{
+			background: $avoGreen;
+			color: $avoDarkGreen;
+		}		
+	}
+}

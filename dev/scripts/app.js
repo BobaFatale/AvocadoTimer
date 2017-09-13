@@ -23,7 +23,7 @@ class App extends React.Component {
 		this.state = {
 			avocados: [],
 			userAvocados: [],
-			daysToRipe: 1,
+			daysToRipe: 14,
 			timeOfDay: '',
 			avocadoName: '',
 			avocadoEmail: '',
@@ -131,7 +131,7 @@ class App extends React.Component {
 		}
 		userDBRef.push(newAvocado);
 		this.setState({
-			daysToRipe: 1,
+			daysToRipe: 14,
 			timeOfDay: '',
 			avocadoName: '',
 			avocadoEmail: '',
@@ -155,6 +155,7 @@ class App extends React.Component {
 					avocadoEmail={this.state.avocadoEmail}
 					checked={this.state.checked}
 					user={this.state.user}
+					tod={this.state.timeOfDay}
 				/>
 				<DisplayAvocado
 					avocados={this.state.userAvocados}

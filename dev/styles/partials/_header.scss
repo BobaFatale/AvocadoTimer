@@ -40,11 +40,10 @@ h2{
 	border: 2px solid $avoGreen;
 	color: $avoGreen;
 	padding: 10px 20px;
-}
-.head__svg{
-
-}
-svg{
-	max-height: 100%;
-	max-width: 100%;
+	font-size: 2rem;
+	border-radius: 250px;
+	&:hover{
+		background: $avoDarkGreen;
+		
+	}
 }

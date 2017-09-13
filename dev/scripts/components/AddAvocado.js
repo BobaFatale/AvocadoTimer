@@ -1,29 +1,54 @@
 import React from 'react';
+import classNames from 'classnames';
 
 class AddAvocado extends React.Component {
 	render(){
 		const user = this.props.user;
+		const classesMorn = classNames({
+			"avocadoForm__radio--morn":true,
+			"avocadoForm__radio--active": this.props.tod === '9',
+		})
+		const classesAft = classNames({
+			"avocadoForm__radio--aft":true,
+			"avocadoForm__radio--active": this.props.tod === '12',
+			})
+		const classesEve = classNames({
+			"avocadoForm__radio--eve":true,
+			"avocadoForm__radio--active": this.props.tod === '18',
+		})
 		let form = '';
 		if (user) {
 			form = (
 				<div className="wrapper">
-					<form onSubmit={this.props.handleAdd}>
-						<label htmlFor="avocadoName">Give Your Avocado a Name</label>
-						<input type="text" id="avocadoName" name="avocadoName" placeholder="Give your avocado a name" value={this.props.avocadoName} onChange={this.props.handleInput} />
-						<div className="addAvocado__range">
-							<input type="range" min='1' max='14' step='1' value={this.props.daysToRipe} name="daysToRipe" onChange={this.props.handleInput} />
+					<form className="avocadoForm" onSubmit={this.props.handleAdd}>
+						<h3>Start an avocado timer</h3>
+						<div className="avocadoForm__name">
+							<label htmlFor="avocadoName" className="screenReader">Give Your Avocado a Name</label>
+							<input type="text" id="avocadoName" name="avocadoName" placeholder="Give your avocado a name so you can remember it later" required value={this.props.avocadoName} onChange={this.props.handleInput} />
 						</div>
-						<label htmlFor="daysToRipe">Ripe in # of days:</label>
-						<input type="number" id="daysToRipe" name="daysToRipe" value={this.props.daysToRipe} min="1" max="14" onChange={this.props.handleInput}/>
-						<div>
-							<label htmlFor="morningToD">Morning</label>
+						<h4>Match the colour of your avocado</h4>
+						<div className="avocadoForm__date">
+							<div className="avocadoForm__range">
+								<div className="rangeBar"></div>
+								<input type="range" min='1' max='14' step='1' value={this.props.daysToRipe} name="daysToRipe" onChange={this.props.handleInput} />
+							</div>
+							<div className="avocadoForm__number">
+								
+								<input type="number" id="daysToRipe" name="daysToRipe" value={this.props.daysToRipe} min="1" max="14" onChange={this.props.handleInput}/>
+								<label htmlFor="daysToRipe">Ripe in # of days</label>
+							</div>
+						</div>
+						<div className="avocadoForm__radio">
+							<label className={classesMorn} htmlFor="morningToD">Morning</label>
 							<input type="radio" name="timeOfDay" id="morningToD" value="9" className="addAvocado__radioToD" required checked={this.props.checked === "9"} onChange={(e) => this.props.handleInput(e, true)} />
-							<label htmlFor="afternoonToD">Afternoon</label>
+							<label className={classesAft} htmlFor="afternoonToD">Afternoon</label>
 							<input type="radio" name="timeOfDay" id="afternoonToD" value="12" className="addAvocado__radioToD" required checked={this.props.checked === "12"}  onChange={(e) => this.props.handleInput(e, true)} />
-							<label htmlFor="eveningToD">Evening</label>
+							<label className={classesEve} htmlFor="eveningToD">Evening</label>
 							<input type="radio" name="timeOfDay" id="eveningToD" value="18" className="addAvocado__radioToD" required checked={this.props.checked === "18"} onChange={(e) => this.props.handleInput(e, true)} />
 						</div>
-						<button>Add Avocado</button>
+						<div className="avocadoForm__button">
+							<button>Add Avocado</button>
+						</div>
 					</form>
 				</div>
 			)
