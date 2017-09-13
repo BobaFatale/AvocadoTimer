@@ -27,13 +27,19 @@ class AddAvocado extends React.Component {
 			)
 		}else if (user === null){
 			form = (
-				<p>You must be logged in to use Avocado Timer</p>
+				<div className="addAvocado__splash">
+					<p>You must be logged in to use Avocado Timer</p>
+				</div>
 			)
 		}
 		return(
-			<div className="AddAvocado">
-				{form}
-			</div>
+			<section className="form">
+				<div className="wrapper">
+					<div className="AddAvocado">
+						{form}
+					</div>
+				</div>
+			</section>
 		)
 	}
 }

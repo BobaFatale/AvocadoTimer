@@ -11,7 +11,10 @@ const Header = (props) => {
 	return(
 		<header>
 			<div className="headWrap">
-				<h1>Avocado Timer</h1>
+				<div className="header__title">
+					<h1>Avocado Timer</h1>
+					<h2>by Guacr🥑</h2>
+				</div>
 				{auth}
 			</div>
 		</header>
