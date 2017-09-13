@@ -1,19 +1,61 @@
 .avocadoList{
-	padding: 30px 0;
 	h3{
 		text-align: center;
 		font-size: 3rem;
+		color: $avoDarkGreen;
+		margin-bottom: 30px;
 	}
 }
+.avocadoList__showList{
+	padding: 30px 0 50px;
+	min-height: 40vh;
+}
 .avocadoList__avocado{
+	border-bottom: 1px solid $avoDarkGreen;
+	background: transparentize($avoBlack,0.05);
+	color: $avoDarkGreen;
+	padding: 20px 0;
+	margin-bottom: 5px;
 	.wrapper{
 		display: flex;
 		flex-direction: row;
-		justify-content: center;
+		justify-content: space-around;
 		align-items: center;
 		flex-wrap: wrap;
+		text-align: left;
+	}
+	h4{
+		font-size: 1.6rem;
+		text-transform: uppercase;
+		width: 20%;
+	}
+	p{
+		width: 30%;
+		font-size: 1.4rem;
+	}
+	button{
+		padding: 10px 20px;
+		background: $avoDarkGreen;
+		border: 2px solid $avoGreen;
+		border-radius: 250px;
+		color: $avoGreen;
+		font-size: 1.4rem;
 	}
 }
 .avocadoList__avocado--expired{
 	background: rgba(255,0,0,0.5);
+}
+.avocado__countdown{
+	width: 30%;
+}
+.timer{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	p{
+		width: (100%/3);
+		font-weight: 700;
+	}
 }

@@ -55,15 +55,15 @@ class Countdown extends React.Component {
 		return(
 			<div className='avocado__countdown'>
 				<div className="timer">
-					<div className="timer__days">
+					<p className="timer__days">
 					{this.state.timeLeft.days} Days
-					</div>
-					<div className="timer__hours">
+					</p>
+					<p className="timer__hours">
 					{this.state.timeLeft.hours} Hours
-					</div>
-					<div className="timer__minutes">
+					</p>
+					<p className="timer__minutes">
 					{this.state.timeLeft.minutes} Minutes
-					</div>
+					</p>
 				</div>
 			</div>
 		)

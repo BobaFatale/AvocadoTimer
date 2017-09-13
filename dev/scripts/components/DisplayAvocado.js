@@ -9,17 +9,19 @@ class DisplayAvocado extends React.Component {
 		const user = this.props.user;
 		let display = '';
 		if (user){
-			display = (<ul> {this.props.avocados.map((avocado) => {
+			display = (<div className="avocadoList__showList">
+				<h3>Your Avocados</h3>
+				<ul> {this.props.avocados.map((avocado) => {
 	    	return (
     			<AvocadoCard key={avocado.id} cardId={avocado.id} avocado={avocado} removeAvocado={this.props.removeAvocado} user={user} />
     		);
-    	})} </ul>)
+    	})} </ul></div>)
 		}else if(user === null){
 			// display = ()
 		}
 		return(
 			<section className='avocadoList'>
-				<h3>Your Avocados</h3>
+				
 	    	{display}
 			</section>
 		)
