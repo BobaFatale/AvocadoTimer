@@ -15,7 +15,6 @@ class AvocadoCard extends React.Component {
 		})
 	}
 	expired(){
-
 		this.setState({
 			expired: true,
 		})

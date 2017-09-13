@@ -29,7 +29,7 @@ pendRef.on("value", (snapshot) => {
 //current
 //run on setTimeout first between now and midnight
 //after that setinterval begins between all the rest;
-const timer = setInterval(() => tick(), 3600000);
+const timer = setInterval(() => tick(), 600000);
 
 const tick = () => {
 	console.log('ping');

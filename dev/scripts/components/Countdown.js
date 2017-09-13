@@ -40,18 +40,13 @@ class Countdown extends React.Component {
 		}
 	}
 	timerEnds() {
-		// this.props.removeAvocado(this.key);
 		this.props.expired();
-		this.props.removeAvocado(this.props.parentID);
+		// this.props.removeAvocado(this.props.parentID);
 		this.setState({
 			timeLeft: '',
 		})
 	}
 	render(){
-		// const classes = className({
-		// 	'avocado__countdown':true,
-		// 	'avocado__countdown--over': false,
-		// })
 		return(
 			<div className='avocado__countdown'>
 				<div className="timer">
