@@ -9,6 +9,9 @@ class Countdown extends React.Component {
 		this.runCountdown();
 		this.runCountdown = this.runCountdown.bind(this);
 	}
+	componentWillUnmount() {
+		clearInterval(this.timerID);
+	}
 	runCountdown(){
 		const parseTimeLeft = (ripeDate) => {
 			const currentTime = new Date();
