@@ -21,7 +21,6 @@ let todayEmails = [];
 
 pendRef.on("value", (snapshot) => {
   dbVal = snapshot.val();
-  getEmails(dbVal);
 }, (errorObject) => {
   console.log("The read failed: " + errorObject.code);
 });
@@ -30,13 +29,14 @@ pendRef.on("value", (snapshot) => {
 //current
 //run on setTimeout first between now and midnight
 //after that setinterval begins between all the rest;
-const timer = setInterval(() => tick(), 60000);
+const timer = setInterval(() => tick(), 3600000);
 
 const tick = () => {
 	console.log('ping');
+	getEmails();
 }
 
-const getEmails = (dbVal) => {
+const getEmails = () => {
 	const now = new Date();
 	const currentTime = now.getTime();
 	const plusOne = currentTime + 3600000;
@@ -49,7 +49,9 @@ const getEmails = (dbVal) => {
 		}
 	}
 	console.log(todayEmails);
-	sendEmails(todayEmails);
+	if (todayEmails.length > 0){
+		sendEmails(todayEmails);
+	}
 }
 const sendEmails = (emailList) => {
 	emailList.map((item) => {
@@ -59,20 +61,24 @@ const sendEmails = (emailList) => {
 		const removeRef = pendRef.child(`/${item.id}`);
 		removeRef.remove();
 		const msg = {
-		  to: 'juneanddog@gmail.com',
-		  from: {
+			"send_at": (Math.floor(item.ripeDate/1000)),
+		  "to": item.email,
+		  "from": {
 		  	email:'noreply@guacr.com',
 		  	name:'Guacr Notifications'
 		  },
-		  subject: 'Your Avocado is Ripe',
-		  text: `Hi ${item.username},
-		  Your Avocado ${item.name} is ripe! Don't forget to eat it today!`,
-		  html: `Hi ${item.username},<br>
-		  Your Avocado <strong>${item.name}</strong> is ripe! Don't forget to eat it today!`,
-		  send_at: (Math.floor(item.ripeDate/1000)),
+		  "subject": 'Your 🥑 is Ripe',
+		  "text": `Hi ${item.username},
+
+		  Your Avocado ${item.name} is ripe! Don't forget to eat it today!
+
+		  A friendly reminder from the AvocadoTimer by Guacr 🥑`,
+		  "html": `Hi ${item.username},<br><br>
+						  Your Avocado <strong>${item.name}</strong> is ripe! Don't forget to eat it today!<br><br>
+						  A friendly reminder from the AvocadoTimer by Guacr 🥑`,
 		};
 		console.log(msg);
-		// sgMail.send(msg);
+		sgMail.send(msg);
 	})
 }
 
@@ -80,4 +86,4 @@ app.get("/",(req,res) => {
 	res.send('hello');
 });
 
-app.listen(3500);
+app.listen(process.env.PORT || 3500);

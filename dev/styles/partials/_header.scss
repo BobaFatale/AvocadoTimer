@@ -1,4 +1,36 @@
 header{
 	background: $avoBlack;
 	color: $avoGreen;
+	padding-top: 40px;
+	padding-bottom: 5px;
+}
+
+.headWrap{
+	width: 95%;
+	margin: 0 auto;
+	max-width: 1170px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+}
+h1{
+	font-family: 'Roboto Slab', serif;
+	font-size: 3.6rem;
+}
+
+.auth__button{
+	appearance:none;
+	background: $avoBlack;
+	border: 2px solid $avoGreen;
+	color: $avoGreen;
+	padding: 10px 20px;
+}
+.head__svg{
+
+}
+svg{
+	max-height: 100%;
+	max-width: 100%;
 }

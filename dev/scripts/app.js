@@ -1,3 +1,8 @@
+//future goals:
+//input vailidation
+//fix email send_at value
+
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import moment from 'moment';

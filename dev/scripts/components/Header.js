@@ -4,14 +4,16 @@ const Header = (props) => {
 	const user = props.user;
 	let auth = '';
 	if (user){
-		auth = ( <button onClick={props.logout}>Log Out</button> )
+		auth = ( <button className="auth__button auth__button--logout" onClick={props.logout}>Log Out</button> )
 	}else if(user === null){
-		auth = ( <button onClick={props.login}>Log In</button> )
+		auth = ( <button className="auth__button auth__button--login" onClick={props.login}>Log In</button> )
 	}
 	return(
 		<header>
-			<h1>Avocado Timer</h1>
-			{auth}
+			<div className="headWrap">
+				<h1>Avocado Timer</h1>
+				{auth}
+			</div>
 		</header>
 	)
 }

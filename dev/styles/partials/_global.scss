@@ -15,13 +15,30 @@ ul{
 }
 body{
 	background: $avoGreen;
+	background-size: cover;
 	color: $avoBlack;
 	font-family: 'Roboto Condensed', sans-serif;
+	position: relative;
+	&::before{
+		content: '';
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background: url('../../assets/avocado.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom -200px right -200px;
+	}
 
 }
-h1{
-	font-family: 'Roboto Slab', serif;
-
+#app{
+	position: relative;
+	z-index: $topLayer;
+}
+.avocadoList{
+	
 }
 
 .wrapper{
