@@ -1,0 +1,15 @@
+footer{
+	background: $avoBlack;
+	color:$avoDarkGreen;
+	min-height: 5vh;
+}
+.footer__text{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	p{
+		font-size: 1.2rem;
+	}
+}

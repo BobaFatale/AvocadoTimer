@@ -28,7 +28,15 @@ class AddAvocado extends React.Component {
 		}else if (user === null){
 			form = (
 				<div className="addAvocado__splash">
-					<p>You must be logged in to use Avocado Timer</p>
+					<h3>Welcome to Avocado Timer</h3>
+					<h4>the website designed to save <em>your</em> avocados</h4>
+					<h5>How to use <span>Avocado Timer🥑</span></h5>
+					<ol>
+						<li>Sign in with your Google account</li>
+						<li>Add your avocado and its ripeness level</li>
+						<li>We'll email you to let you know your avocado is ready</li>
+						<li>Enjoy you avocado when it is perfectly ripe!</li>
+					</ol>
 				</div>
 			)
 		}

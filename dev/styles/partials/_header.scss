@@ -1,18 +1,19 @@
 header{
 	background: $avoBlack;
 	color: $avoGreen;
-	padding-top: 40px;
-	padding-bottom: 10px;
+
 }
 
 .headWrap{
+	padding-bottom: 10px;
+	height: 10vh;
 	width: 95%;
 	margin: 0 auto;
 	max-width: 1170px;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	align-items: center;
+	align-items: flex-end;
 	flex-wrap: wrap;
 }
 .header__title{
