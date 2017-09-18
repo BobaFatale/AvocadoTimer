@@ -25,6 +25,7 @@ header{
 }
 h1{
 	font-family: 'Baloo', cursive;
+	text-shadow: 3px 0 0 $avoDarkGreen, -3px 0 0 $avoDarkGreen, 0 3px 0 $avoDarkGreen, 0 -3px 0 $avoDarkGreen, 2px 2px $avoDarkGreen, -2px -2px 0 $avoDarkGreen, 2px -2px 0 $avoDarkGreen, -2px 2px 0 $avoDarkGreen;
 	font-size: 3.6rem;
 	line-height: 1;
 }
