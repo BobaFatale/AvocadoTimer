@@ -13,7 +13,8 @@ const Header = (props) => {
 			<div className="headWrap">
 				<div className="header__title">
 					<h1>Avocado Timer</h1>
-					<h2>by Guacr🥑</h2>
+					<h2>by Guacr</h2>
+					<img src="../../../assets/avocadoSmall.svg" />
 				</div>
 				{auth}
 			</div>

@@ -63,8 +63,8 @@ class AddAvocado extends React.Component {
 					<ol>
 						<li>Sign in with your Google account</li>
 						<li>Add your avocado and its ripeness level</li>
-						<li>We'll email you to let you know your avocado is ready</li>
-						<li>Enjoy your avocado when it is perfectly ripe! 🍴🥑😋</li>
+						<li>We'll email you to let you know your avocado is ready 📧</li>
+						<li>Enjoy your avocado when it is perfectly ripe! 🍴<img src="../../../assets/avocadoSmall.svg" />😋</li>
 						<li>Tell all your friends</li>
 					</ol>
 				</div>

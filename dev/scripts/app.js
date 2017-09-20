@@ -57,9 +57,6 @@ class App extends React.Component {
 		    })
 		  }
 		});
-		// dbRef.on('value', (snapshot) => {
-		// 	const items = snapshot.val();			
-		// })
 	}
 	pageLoad(){
 

@@ -37,12 +37,10 @@ class AvocadoCard extends React.Component {
 			<li 
 				className={classes}
 			>
-				<div className='wrapper'>
-					<h4>{this.props.avocado.name}</h4>
-					<p>Ripe on {ripeDate.format("dddd, MMMM Do YYYY, h:mm a")} </p>
-					<Countdown removeAvocado={this.props.removeAvocado} ripeDate={this.props.avocado.ripeDate} expired={this.expired} parentID={this.props.cardId} />
-					<button onClick={() => this.props.removeAvocado(this.props.avocado.id,this.props.avocado.emailKey)}>Remove Avocado</button>
-				</div>
+				<h4>{this.props.avocado.name}</h4>
+				<p>Ripe on {ripeDate.format("dddd, MMMM Do YYYY, h:mm a")} </p>
+				<Countdown removeAvocado={this.props.removeAvocado} ripeDate={this.props.avocado.ripeDate} expired={this.expired} parentID={this.props.cardId} />
+				<button onClick={() => this.props.removeAvocado(this.props.avocado.id,this.props.avocado.emailKey)}>Remove Avocado</button>
 			</li>
 		);
 	}

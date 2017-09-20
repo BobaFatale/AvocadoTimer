@@ -11,11 +11,15 @@ class DisplayAvocado extends React.Component {
 		if (user){
 			display = (<div className="avocadoList__showList">
 				<h3>Your Avocados</h3>
-				<ul> {this.props.avocados.map((avocado) => {
-	    	return (
-    			<AvocadoCard key={avocado.id} cardId={avocado.id} avocado={avocado} removeAvocado={this.props.removeAvocado} user={user} />
-    		);
-    	})} </ul></div>)
+				<div className='wrapper'>
+					<ul> {this.props.avocados.map((avocado) => {
+		    	return (
+	    			<AvocadoCard key={avocado.id} cardId={avocado.id} avocado={avocado} removeAvocado={this.props.removeAvocado} user={user} />
+	    		);
+	    	})} </ul>
+
+				</div>
+			</div>)
 		}else if(user === null){
 			// display = ()
 		}
